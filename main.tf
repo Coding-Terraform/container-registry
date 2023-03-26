@@ -19,7 +19,7 @@ module "acr" {
 }
 
 resource "docker_registry_image" "image" {
-  name          = "${module.acr.login_server}/nginx-ingress:001"
+  name          = "${module.acr.login_server}/${docker_image.image.name}"
   keep_remotely = false
 
 }
