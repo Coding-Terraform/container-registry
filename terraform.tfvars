@@ -6,7 +6,7 @@ tags = {
 }
 
 ############# Conatiner Registry  #############
-acr_name                      = "acrdevtest"
+acr_name                      = "acrmltdtest"
 public_network_access_enabled = false
 admin_enabled                 = false
 acr_sku                       = "Premium"
