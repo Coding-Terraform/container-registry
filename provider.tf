@@ -28,7 +28,7 @@ provider "azurerm" {
 provider "docker" {
   host = "unix:///var/run/docker.sock"
 
-   registry_auth {
+  registry_auth {
     address  = module.acr.login_server
     username = module.acr.admin_username
     password = module.acr.admin_password

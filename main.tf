@@ -18,15 +18,6 @@ module "acr" {
 
 }
 
-provider "docker" {
-
-  registry_auth {
-    address  = module.acr.login_server
-    username = module.acr.admin_username
-    password = module.acr.admin_password
-  }
-}
-
 resource "docker_registry_image" "image" {
   name          = "nginx-ingress:001"
   keep_remotely = false
