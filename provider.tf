@@ -1,5 +1,5 @@
-  terraform {
-    backend "azurerm" {
+terraform {
+  backend "azurerm" {
     resource_group_name  = "TerraformVsBicep"
     storage_account_name = "terraformbackendstorge"
     container_name       = "terraformstate"
@@ -20,7 +20,7 @@
 provider "azurerm" {
   features {
     virtual_machine {
-      delete_os_disk_on_deletion     = true
+      delete_os_disk_on_deletion = true
     }
   }
 }
