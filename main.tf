@@ -1,6 +1,6 @@
 
 module "resource_group" {
-  source   = "./Modules/resource_group"
+  source   = "./modules/resource_group"
   name     = var.rg_name
   location = var.location
   tags     = var.tags
@@ -8,7 +8,7 @@ module "resource_group" {
 
 module "acr" {
 
-  source                        = "./Modules/container_registry"
+  source                        = "./modules/container_registry"
   name                          = var.acr_name
   resource_group_name           = module.resource_group.name
   location                      = var.location
