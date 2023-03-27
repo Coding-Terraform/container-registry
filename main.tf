@@ -33,9 +33,13 @@ module "acr" {
 #   pull_triggers = [data.docker_registry_image.nginx.sha256_digest]
 # }
 
-resource "docker_registry_image" "image" {
-  name          = "nginx:latest"
+resource "docker_registry_image" "helloworld" {
+  name          = docker_image.image.name
   keep_remotely = true
+}
+
+resource "docker_image" "image" {
+  name          = "nginx:latest"
 
   build {
     context    = Dockerfile
