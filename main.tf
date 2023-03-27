@@ -26,14 +26,14 @@ resource "docker_registry_image" "nginx-ingress" {
   ]
 }
 
-resource "docker_image" "nginx" {
-  name = "registry.k8s.io/ingress-nginx/controller:v1.3.0"
-}
+# resource "docker_image" "nginx" {
+#   name = "registry.k8s.io/ingress-nginx/controller:v1.3.0"
+# }
 
 resource "docker_tag" "tag" {
   source_image = "registry.k8s.io/ingress-nginx/controller:v1.3.0"
   target_image = "${module.acr.login_server}/ingress-nginx/controller:v1.3.0"
-  depends_on = [
-    docker_image.nginx
-  ]
+  # depends_on = [
+  #   docker_image.nginx
+  # ]
 }

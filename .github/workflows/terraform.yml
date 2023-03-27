@@ -29,11 +29,11 @@ jobs:
     - name: Checkout Source Code
       uses: actions/checkout@v3
 
-    # - name: Docker
-    #   run: |
-    #     docker pull registry.k8s.io/ingress-nginx/controller:v1.3.0
-    #     docker pull registry.k8s.io/ingress-nginx/kube-webhook-certgen:v1.3.0
-    #     docker pull registry.k8s.io/defaultbackend-amd64:1.5
+    - name: Docker
+      run: |
+        docker pull registry.k8s.io/ingress-nginx/controller:v1.3.0
+        docker pull registry.k8s.io/ingress-nginx/kube-webhook-certgen:v1.3.0
+        docker pull registry.k8s.io/defaultbackend-amd64:1.5
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
@@ -62,3 +62,7 @@ jobs:
     - name: Terraform Apply
       # if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
       run: terraform apply -auto-approve -input=false -no-color result.tfplan
+
+    - name: Get docker images
+      run: |
+        ddocker images ls --all
