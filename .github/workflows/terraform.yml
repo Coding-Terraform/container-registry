@@ -34,7 +34,6 @@ jobs:
         docker pull registry.k8s.io/ingress-nginx/controller:v1.3.0
         docker pull registry.k8s.io/ingress-nginx/kube-webhook-certgen:v1.3.0
         docker pull registry.k8s.io/defaultbackend-amd64:1.5
-        docker image ls --all
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
@@ -58,16 +57,12 @@ jobs:
     - name: Terraform Plan
       run: terraform plan -input=false -out result.tfplan
 
-    - name: Docker
-      run: |
-        docker image ls --all
-
       # On push to "main", build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Apply
       # if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
       run: terraform apply -auto-approve -input=false -no-color result.tfplan
 
-    - name: Get docker images
+    - name: Read hosts file
       run: |
-        docker image ls --all
+        cat /etc/hosts
