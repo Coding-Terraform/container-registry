@@ -42,7 +42,7 @@ resource "docker_image" "image" {
   name          = "nginx:latest"
 
   build {
-    context    = Dockerfile
+    context    = "Dockerfile"
     build_args = {}
   }
 }
