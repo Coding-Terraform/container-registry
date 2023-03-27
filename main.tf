@@ -39,7 +39,7 @@ resource "docker_registry_image" "helloworld" {
 }
 
 resource "docker_image" "image" {
-  name          = "nginx:latest"
+  name = "nginx:latest"
 
   build {
     context    = "Dockerfile"
