@@ -43,6 +43,6 @@ data "docker_registry_image" "nginx" {
 }
 
 resource "docker_image" "nginx" {
-  name          = data.docker_registry_image.ubunnginxtu.name
+  name          = data.docker_registry_image.nginx.name
   pull_triggers = [data.docker_registry_image.nginx.sha256_digest]
 }
