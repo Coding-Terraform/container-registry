@@ -18,20 +18,6 @@ module "acr" {
 
 }
 
-# data "docker_registry_image" "nginx" {
-#   # name          = "${module.acr.login_server}/${docker_image.image}"
-#   # keep_remotely = false
-
-#   name = "nginx:latest"
-
-# }
-
-# resource "docker_image" "image" {
-#   #name = "nginx/nginx-ingress"
-
-#   name          = data.docker_registry_image.nginx.name
-#   pull_triggers = [data.docker_registry_image.nginx.sha256_digest]
-# }
 
 resource "docker_registry_image" "helloworld" {
   name          = "${module.acr.login_server}/ingress-nginx/controller:v1.3.0"
@@ -41,9 +27,9 @@ resource "docker_registry_image" "helloworld" {
   ]
 }
 
-# resource "docker_image" "image" {
-#   name = "nginx:latest"
-# }
+resource "docker_image" "nginx" {
+  name = "registry.k8s.io/ingress-nginx/controller:v1.3.0"
+}
 
 resource "docker_tag" "tag" {
   source_image = "registry.k8s.io/ingress-nginx/controller:v1.3.0"
