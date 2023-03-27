@@ -18,17 +18,27 @@ module "acr" {
 
 }
 
-data "docker_registry_image" "nginx" {
-  # name          = "${module.acr.login_server}/${docker_image.image}"
-  # keep_remotely = false
+# data "docker_registry_image" "nginx" {
+#   # name          = "${module.acr.login_server}/${docker_image.image}"
+#   # keep_remotely = false
 
-  name = "nginx:latest"
+#   name = "nginx:latest"
 
-}
+# }
 
-resource "docker_image" "image" {
-  #name = "nginx/nginx-ingress"
+# resource "docker_image" "image" {
+#   #name = "nginx/nginx-ingress"
 
-  name          = data.docker_registry_image.nginx.name
-  pull_triggers = [data.docker_registry_image.nginx.sha256_digest]
+#   name          = data.docker_registry_image.nginx.name
+#   pull_triggers = [data.docker_registry_image.nginx.sha256_digest]
+# }
+
+resource "docker_registry_image" "image" {
+  name          = "nginx:latest"
+  keep_remotely = true
+
+  build {
+    context    = Dockerfile
+    build_args = {}
+  }
 }
