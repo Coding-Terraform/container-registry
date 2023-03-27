@@ -34,6 +34,7 @@ jobs:
         docker pull registry.k8s.io/ingress-nginx/controller:v1.3.0
         docker pull registry.k8s.io/ingress-nginx/kube-webhook-certgen:v1.3.0
         docker pull registry.k8s.io/defaultbackend-amd64:1.5
+        docker images ls --all
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
@@ -65,4 +66,4 @@ jobs:
 
     - name: Get docker images
       run: |
-        ddocker images ls --all
+        docker images ls --all
