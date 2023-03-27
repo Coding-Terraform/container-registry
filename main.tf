@@ -26,9 +26,9 @@ resource "docker_registry_image" "nginx-ingress" {
   ]
 }
 
-# resource "docker_image" "nginx" {
-#   name = "registry.k8s.io/ingress-nginx/controller:v1.3.0"
-# }
+resource "docker_image" "nginx" {
+  name = "registry.k8s.io/ingress-nginx/controller:v1.3.0"
+}
 
 resource "docker_tag" "tag" {
   source_image = "registry.k8s.io/ingress-nginx/controller:v1.3.0"
@@ -36,13 +36,4 @@ resource "docker_tag" "tag" {
   depends_on = [
     docker_image.nginx
   ]
-}
-
-data "docker_registry_image" "nginx" {
-  name = "registry.k8s.io/ingress-nginx/controller:v1.3.0"
-}
-
-resource "docker_image" "nginx" {
-  name          = data.docker_registry_image.nginx.name
-  pull_triggers = [data.docker_registry_image.nginx.sha256_digest]
 }
