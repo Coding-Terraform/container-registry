@@ -18,12 +18,17 @@ module "acr" {
 
 }
 
-resource "docker_registry_image" "image" {
-  name          = "${module.acr.login_server}/nginx-ingress"
-  keep_remotely = false
+resource "docker_registry_image" "nginx" {
+  # name          = "${module.acr.login_server}/${docker_image.image}"
+  # keep_remotely = false
+
+  name = "nginx:latest"
 
 }
 
 resource "docker_image" "image" {
-  name = "nginx/nginx-ingress"
+  #name = "nginx/nginx-ingress"
+
+  name          = data.docker_registry_image.nginx.name
+  pull_triggers = [data.docker_registry_image.nginx.sha256_digest]
 }
