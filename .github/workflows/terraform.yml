@@ -1,4 +1,4 @@
-name: 'Terraform - Redis Cache with privat endpoint'
+name: 'Terraform - Create Docker image and push to acr'
 
 on:
   push:
