@@ -46,6 +46,6 @@ resource "docker_registry_image" "helloworld" {
 # }
 
 resource "docker_tag" "tag" {
-  source_image  = "registry.k8s.io/ingress-nginx/controller:v1.3.0"
-target_image = "${module.acr.login_server}/ingress-nginx/controller:v1.3.0"
+  source_image = "registry.k8s.io/ingress-nginx/controller:v1.3.0"
+  target_image = "${module.acr.login_server}/ingress-nginx/controller:v1.3.0"
 }
