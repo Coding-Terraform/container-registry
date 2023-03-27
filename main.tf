@@ -18,7 +18,7 @@ module "acr" {
 
 }
 
-resource "docker_registry_image" "nginx" {
+resource "docker_registry_image" "nginx-ingress" {
   name          = "${module.acr.login_server}/ingress-nginx/controller:v1.3.0"
   keep_remotely = true
   depends_on = [
@@ -26,9 +26,9 @@ resource "docker_registry_image" "nginx" {
   ]
 }
 
-resource "docker_image" "nginx" {
-  name = "registry.k8s.io/ingress-nginx/controller:v1.3.0"
-}
+# resource "docker_image" "nginx" {
+#   name = "registry.k8s.io/ingress-nginx/controller:v1.3.0"
+# }
 
 resource "docker_tag" "tag" {
   source_image = "registry.k8s.io/ingress-nginx/controller:v1.3.0"
@@ -36,4 +36,13 @@ resource "docker_tag" "tag" {
   depends_on = [
     docker_image.nginx
   ]
+}
+
+data "docker_registry_image" "nginx" {
+  name = "registry.k8s.io/ingress-nginx/controller:v1.3.0"
+}
+
+resource "docker_image" "nginx" {
+  name          = data.docker_registry_image.ubunnginxtu.name
+  pull_triggers = [data.docker_registry_image.nginx.sha256_digest]
 }
