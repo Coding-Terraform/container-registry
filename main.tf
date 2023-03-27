@@ -18,7 +18,7 @@ module "acr" {
 
 }
 
-resource "docker_registry_image" "nginx" {
+data "docker_registry_image" "nginx" {
   # name          = "${module.acr.login_server}/${docker_image.image}"
   # keep_remotely = false
 
