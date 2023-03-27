@@ -18,15 +18,16 @@ module "acr" {
 
 }
 
+
+resource "docker_tag" "tag" {
+  source_image = "registry.k8s.io/ingress-nginx/controller:v1.3.0"
+  target_image = "${module.acr.login_server}/ingress-nginx/controller:v1.3.0"
+}
+
 resource "docker_registry_image" "nginx" {
   name          = "${module.acr.login_server}/ingress-nginx/controller:v1.3.0"
   keep_remotely = false
   depends_on = [
     docker_tag.tag
   ]
-}
-
-resource "docker_tag" "tag" {
-  source_image = "registry.k8s.io/ingress-nginx/controller:v1.3.0"
-  target_image = "${module.acr.login_server}/ingress-nginx/controller:v1.3.0"
 }
