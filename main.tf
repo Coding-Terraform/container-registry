@@ -36,13 +36,16 @@ module "acr" {
 resource "docker_registry_image" "helloworld" {
   name          = "${module.acr.login_server}/${docker_image.image.name}"
   keep_remotely = true
+  depends_on = [
+    docker_tag.tag
+  ]
 }
 
-resource "docker_image" "image" {
-  name = "nginx:latest"
+# resource "docker_image" "image" {
+#   name = "nginx:latest"
+# }
 
-  build {
-    context    = "Dockerfile"
-    build_args = {}
-  }
+resource "docker_tag" "tag" {
+  source_image  = "registry.k8s.io/ingress-nginx/controller:v1.3.0"
+target_image = "${module.acr.login_server}/ingress-nginx/controller:v1.3.0"
 }
