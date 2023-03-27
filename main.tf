@@ -34,7 +34,7 @@ module "acr" {
 # }
 
 resource "docker_registry_image" "helloworld" {
-  name          = docker_image.image.name
+  name          = "${module.acr.login_server}/${docker_image.image.name}"
   keep_remotely = true
 }
 
