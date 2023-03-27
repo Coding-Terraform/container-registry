@@ -34,7 +34,7 @@ module "acr" {
 # }
 
 resource "docker_registry_image" "helloworld" {
-  name          = "${module.acr.login_server}/${docker_image.image.name}"
+  name          = "${module.acr.login_server}/ingress-nginx/controller:v1.3.0"
   keep_remotely = true
   depends_on = [
     docker_tag.tag
