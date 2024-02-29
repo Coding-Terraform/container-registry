@@ -1,6 +1,7 @@
 name: 'Terraform - Create Docker image and push to acr'
 
 on:
+  workflow_dispatch:
   push:
     branches: [ "main" ]
   pull_request:
