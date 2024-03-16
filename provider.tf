@@ -1,12 +1,12 @@
 terraform {
   backend "azurerm" {
-    resource_group_name  = "rg-bck-env1-mlt-euw"
-    storage_account_name = "tfstatemlt"
-    container_name       = "tfstatecontainer"
+    resource_group_name  = "rg-terraform-states"
+    storage_account_name = "saterraformbackendstates"
+    container_name       = "terraformstates"
     key                  = "acr-encryption/tfstate"
     use_msi              = true
-    subscription_id      = "17e5a339-c9a2-4e19-9f00-e077071e8443"
-    tenant_id            = "505cca53-5750-4134-9501-8d52d5df3cd1"
+    subscription_id      = "f64d003b-4449-4899-81e2-0bf114282ef6"
+    tenant_id            = "13b94438-e31c-4b23-81a1-cfeb39466cb9"
   }
   required_providers {
     azurerm = {
