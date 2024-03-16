@@ -46,11 +46,13 @@ jobs:
     #    cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
         
     - name: Login to Azure
-      uses: azure/login@v1.5.1
-      with:
-        tenant-id: ${{secrets.AZURE_TENANT_ID}}
-        client-id: ${{vars.AGENT_MANAGED_IDENTITY_CLIENT_ID}}
-        subscription-id: ${{secrets.AZURE_SUBSCRIPTION_ID}}
+      run: |
+        az login --identity
+      #uses: azure/login@v1.5.1
+      #with:
+      #  tenant-id: ${{secrets.AZURE_TENANT_ID}}
+      #  client-id: ${{vars.AGENT_MANAGED_IDENTITY_CLIENT_ID}}
+      #  subscription-id: ${{secrets.AZURE_SUBSCRIPTION_ID}}
           
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
